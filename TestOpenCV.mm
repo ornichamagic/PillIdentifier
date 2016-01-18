@@ -162,7 +162,7 @@ using namespace std;
     
     
     Mat RGB=img0(cv::Rect(i,j,1,1));
-    cvtColor(img0, HSV,CV_BGR2HSV);
+    cvtColor(img0, HSV,CV_RGB2HSV);
     
     Vec3b hsv=HSV.at<Vec3b>(i,j);
     int H=hsv.val[0];
