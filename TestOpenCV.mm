@@ -150,6 +150,16 @@ using namespace std;
     cout << " i: " << i << endl;
     cout << " j: " << j << endl;
     
+   // Mat image=src.clone();
+    Vec3b rgb=img0.at<Vec3b>(i,j);
+    int B=rgb.val[2];
+    int G=rgb.val[1];
+    int R=rgb.val[0];
+    
+    cout << " R: " << R << endl;
+    cout << " G: " << G << endl;
+    cout << " B: " << B << endl;
+    
     
     Mat RGB=img0(cv::Rect(i,j,1,1));
     cvtColor(img0, HSV,CV_BGR2HSV);
@@ -158,6 +168,7 @@ using namespace std;
     int H=hsv.val[0];
     int S=hsv.val[1];
     int V=hsv.val[2];
+    
     
     cout << " H: " << H << endl;
     cout << " S: " << S << endl;
