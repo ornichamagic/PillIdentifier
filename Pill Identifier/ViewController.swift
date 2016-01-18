@@ -27,6 +27,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
           self.performSegueWithIdentifier("segueIdentifier", sender: self)
     }
     
+    @IBOutlet weak var txtArea: UILabel!
+    @IBOutlet weak var txtColor: UILabel!
     @IBOutlet weak var txtname: UILabel!
     
     @IBOutlet weak var imageView: UIImageView!
@@ -51,10 +53,16 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func edgeClick(sender: AnyObject) {
         
         let image = imageView.image
-        let edge = TestOpenCV.DetectEdgeWithImage(image);
+        //let edge = TestOpenCV.DetectEdgeWithImage(image);
         let gau = TestOpenCV.Gaussian(image);
         
+        let color = TestOpenCV.DetectColor(image);
+        let area = TestOpenCV.DetectArea(image);
+        
         imageView.image = gau as UIImage;
+        //txtname.text = edge;
+        txtColor.text = color;
+        txtArea.text = area;
         
     }
     override func viewDidLoad() {

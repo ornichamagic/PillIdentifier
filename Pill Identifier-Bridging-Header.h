@@ -8,6 +8,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TestOpenCV : NSObject
-+(UIImage *)DetectEdgeWithImage:(UIImage *)image;
++(NSString *)DetectEdgeWithImage:(UIImage *)image;
 +(UIImage *)Gaussian:(UIImage *)image;
++(NSString *)DetectColor:(UIImage *)image;
++(NSString *)DetectArea:(UIImage *)image;
 @end
