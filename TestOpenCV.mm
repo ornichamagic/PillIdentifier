@@ -12,67 +12,67 @@ using namespace std;
 
 @implementation TestOpenCV : NSObject
 
-+(NSString *)DetectEdgeWithImage:(UIImage *)image{
-    
-    //UIImageをcv::Matに変換
-    cv::Mat mat;
-    UIImageToMat(image, mat);
-    
-    //白黒濃淡画像に変換
-    cv::Mat gray;
-    cv::cvtColor(mat, gray, CV_BGR2GRAY);
-    
-    //エッジ検出
-    cv::Mat edge;
-    cv::Canny(gray, edge, 200, 180);
-    
-    //cv::MatをUIImageに変換
-    UIImage *edgeImg = MatToUIImage(edge);
-    
-    return @"AA";}
-
-
-+(UIImage *)Gaussian:(UIImage *)image{
-    
-    Mat img0;
-    UIImageToMat(image, img0);
-    
-    Mat img1;
-    cvtColor(img0, img1, CV_RGB2GRAY);
-    
-    // apply your filter
-    Canny(img1, img1, 100, 200);
-    
-    // find the contours
-    vector< vector<cv::Point> > contours;
-    findContours(img1, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
-    
-    cout << " Area: " << contours.size() << endl;
-
-    
-    //cout << " Area: " << contourArea(contours[1]) << endl;
-    
-    // you could also reuse img1 here
-    Mat HSV;
-    Mat mask = Mat::zeros(img1.rows, img1.cols, CV_8UC1);
-    int i = (img0.rows/2);
-    int j = (img0.cols/2);
-    
-    Mat RGB=img0(cv::Rect(i,j,1,1));
-    cvtColor(img0, HSV,CV_BGR2HSV);
-    
-    Vec3b hsv=HSV.at<Vec3b>(i,j);
-  
-    
-    
-    //sprintf(name,"H=%d",H);
-    putText(HSV,".", cv::Point(i,j) , FONT_HERSHEY_SIMPLEX, .7, Scalar(0,255,0), 2,8,false );
-    
-    UIImage *edgeImg = MatToUIImage(HSV);
-
-    
-    return edgeImg;
-}
+//+(NSString *)DetectEdgeWithImage:(UIImage *)image{
+//    
+//    //UIImageをcv::Matに変換
+//    cv::Mat mat;
+//    UIImageToMat(image, mat);
+//    
+//    //白黒濃淡画像に変換
+//    cv::Mat gray;
+//    cv::cvtColor(mat, gray, CV_BGR2GRAY);
+//    
+//    //エッジ検出
+//    cv::Mat edge;
+//    cv::Canny(gray, edge, 200, 180);
+//    
+//    //cv::MatをUIImageに変換
+//    UIImage *edgeImg = MatToUIImage(edge);
+//    
+//    return @"AA";}
+//
+//
+//+(UIImage *)Gaussian:(UIImage *)image{
+//    
+//    Mat img0;
+//    UIImageToMat(image, img0);
+//    
+//    Mat img1;
+//    cvtColor(img0, img1, CV_RGB2GRAY);
+//    
+//    // apply your filter
+//    Canny(img1, img1, 100, 200);
+//    
+//    // find the contours
+//    vector< vector<cv::Point> > contours;
+//    findContours(img1, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+//    
+//    cout << " Area: " << contours.size() << endl;
+//
+//    
+//    //cout << " Area: " << contourArea(contours[1]) << endl;
+//    
+//    // you could also reuse img1 here
+//    Mat HSV;
+//    Mat mask = Mat::zeros(img1.rows, img1.cols, CV_8UC1);
+//    int i = (img0.rows/2);
+//    int j = (img0.cols/2);
+//    
+//    Mat RGB=img0(cv::Rect(i,j,1,1));
+//    cvtColor(img0, HSV,CV_BGR2HSV);
+//    
+//    Vec3b hsv=HSV.at<Vec3b>(i,j);
+//  
+//    
+//    
+//    //sprintf(name,"H=%d",H);
+//    putText(HSV,".", cv::Point(i,j) , FONT_HERSHEY_SIMPLEX, .7, Scalar(0,255,0), 2,8,false );
+//    
+//    UIImage *edgeImg = MatToUIImage(HSV);
+//
+//    
+//    return edgeImg;
+//}
 
 +(NSString *)DetectColor:(UIImage *)image{
     NSString *color;
@@ -104,13 +104,13 @@ using namespace std;
      found. Here's some commented out code how to do that:
      */
     
-    //    vector<double> areas(contours.size());
-    //    for(int i = 0; i < contours.size(); i++)
-    //        areas[i] = contourArea(Mat(contours[i]));
-    //    double max;
-    //    Point maxPosition;
-    //    minMaxLoc(Mat(areas),0,&max,0,&maxPosition);
-    //    drawContours(mask, contours, maxPosition.y, Scalar(1), CV_FILLED);
+        vector<double> areas(contours.size());
+        for(int i = 0; i < contours.size(); i++)
+            areas[i] = contourArea(Mat(contours[i]));
+        double max;
+    cv::Point maxPosition;
+        minMaxLoc(Mat(areas),0,&max,0,&maxPosition);
+        drawContours(mask, contours, maxPosition.y, Scalar(1), CV_FILLED);
     
     // let's create a new image now
     Mat crop(img0.rows, img0.cols, CV_8UC3);
@@ -139,7 +139,7 @@ using namespace std;
     //
     Mat HSV;
     //
-    char name[30];
+    //char name[30];
     
     int i = (img0.rows/2);
     int j = (img0.cols/2);
@@ -147,8 +147,8 @@ using namespace std;
 //    int i = 100;
 //    int j = 100;
     
-    cout << " i: " << i << endl;
-    cout << " j: " << j << endl;
+//    cout << " i: " << i << endl;
+//    cout << " j: " << j << endl;
     
    // Mat image=src.clone();
     Vec3b rgb=img0.at<Vec3b>(i,j);
@@ -156,9 +156,9 @@ using namespace std;
     int G=rgb.val[1];
     int R=rgb.val[0];
     
-    cout << " R: " << R << endl;
-    cout << " G: " << G << endl;
-    cout << " B: " << B << endl;
+//    cout << " R: " << R << endl;
+//    cout << " G: " << G << endl;
+//    cout << " B: " << B << endl;
     
     
     Mat RGB=img0(cv::Rect(i,j,1,1));
@@ -170,9 +170,9 @@ using namespace std;
     int V=hsv.val[2];
     
     
-    cout << " H: " << H << endl;
-    cout << " S: " << S << endl;
-    cout << " V: " << V << endl;
+//    cout << " H: " << H << endl;
+//    cout << " S: " << S << endl;
+//    cout << " V: " << V << endl;
     
     if(V == 0)
     {
@@ -270,6 +270,8 @@ using namespace std;
     Mat img0;
     UIImageToMat(image, img0);
     
+    resize(img0, img0, cv::Size(400,400));
+    
     Mat img1;
     cvtColor(img0, img1, CV_RGB2GRAY);
     
@@ -290,54 +292,7 @@ using namespace std;
     formatter.maximumFractionDigits = precision;
    Area = [formatter stringFromNumber:@(contourArea(contours[0]))];
     
-    
-    
-   
-    //cout << " Area: " << contourArea(contours[1]) << endl;
-    
-    // you could also reuse img1 here
-    Mat mask = Mat::zeros(img1.rows, img1.cols, CV_8UC1);
-    
-    // CV_FILLED fills the connected components found
-    drawContours(mask, contours, -1, Scalar(255), CV_FILLED);
-    
-    
-    // let's create a new image now
-    Mat crop(img0.rows, img0.cols, CV_8UC3);
-    
-    // set background to green
-    crop.setTo(Scalar(255,255,255));
-    
-    // and copy the magic apple
-    img0.copyTo(crop, mask);
-    
-    // normalize so imwrite(...)/imshow(...) shows the mask correctly!
-    normalize(mask.clone(), mask, 0.0, 255.0, CV_MINMAX, CV_8UC1);
-
-    
-  
-    Mat HSV;
-    //
-    
-    int i = (img0.rows/2);
-    int j = (img0.cols/2);
-    
-    cout << " i: " << i << endl;
-    cout << " j: " << j << endl;
-    
-    
-    //Mat RGB=img0(cv::Rect(i,j,1,1));
-    cvtColor(img0, HSV,CV_BGR2HSV);
-    
-    Vec3b hsv=HSV.at<Vec3b>(i,j);
-    int H=hsv.val[0];
-    int S=hsv.val[1];
-    int V=hsv.val[2];
-    
-//    cout << " H: " << H << endl;
-//    cout << " S: " << S << endl;
-//    cout << " V: " << V << endl;
-    
+//
     
     
     return Area;

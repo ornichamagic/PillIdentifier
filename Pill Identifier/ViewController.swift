@@ -54,17 +54,28 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
         let image = imageView.image
         //let edge = TestOpenCV.DetectEdgeWithImage(image);
-        let gau = TestOpenCV.Gaussian(image);
+//        let gau = TestOpenCV.Gaussian(image);
         
         let color = TestOpenCV.DetectColor(image);
-        let area = TestOpenCV.DetectArea(image);
+//        let area = TestOpenCV.DetectArea(image);
         
-        imageView.image = gau as UIImage;
+//        imageView.image = gau as UIImage;
         //txtname.text = edge;
         txtColor.text = color;
+//        txtArea.text = area;
+        
+    }
+    
+    
+    
+    @IBAction func Area(sender: AnyObject) {
+        
+        let image = imageView.image
+        let area = TestOpenCV.DetectArea(image);
         txtArea.text = area;
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -84,7 +95,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 
         }
         else {
-            var name = NSUserDefaults.standardUserDefaults().objectForKey("name") as! String
+            let name = NSUserDefaults.standardUserDefaults().objectForKey("name") as! String
             txtname.text = name
         }
         
@@ -97,7 +108,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             // 2
             let loginAction = UIAlertAction(title: "SAVE", style: UIAlertActionStyle.Default) { (action:UIAlertAction) -> Void in
                 
-                let loginTextField = loginController.textFields![0] as! UITextField
+                let loginTextField = loginController.textFields![0] 
                 
                 //let passwordTextField = loginController.textFields![1] as! UITextField
                 
@@ -106,11 +117,11 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             }
             loginAction.enabled = false
             // 3
-            let signupAction = UIAlertAction(title: "Sign Up", style: UIAlertActionStyle.Default, handler: nil)
+            _ = UIAlertAction(title: "Sign Up", style: UIAlertActionStyle.Default, handler: nil)
             
             //let forgotPasswordAction = UIAlertAction(title: "Forgot Password", style: UIAlertActionStyle.Destructive, handler: nil)
             
-            var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
             // 4
             loginController.addTextFieldWithConfigurationHandler { (textField:UITextField!) -> Void in
                 
